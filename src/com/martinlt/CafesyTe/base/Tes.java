@@ -1,17 +1,17 @@
 package com.martinlt.CafesyTe.base;
 
-public class Tés extends  Bebida {
+public class Tes extends  Bebida {
 private int oxidacion;//preguntar tambien por si acaso la profesora no le gusta en int
 
-    public Tés(){
+    public Tes(){
         super();
     }
 
-    public Tés(int oxidacion){
+    public Tes(int oxidacion){
         this.oxidacion=oxidacion;
     }
 
-    public Tés(String nombre, String tipo, int oxidacion) {
+    public Tes(String nombre, String tipo, int oxidacion) {
         super(nombre, tipo);
         this.oxidacion = oxidacion;
     }
@@ -26,7 +26,7 @@ private int oxidacion;//preguntar tambien por si acaso la profesora no le gusta 
 
     @Override
     public String toString() {
-        return "Tés{" +
+        return "Tes{" +
                 "oxidacion=" + oxidacion +
                 '}';
     }

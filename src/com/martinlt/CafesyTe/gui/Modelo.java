@@ -15,12 +15,17 @@ public class Modelo {
     }
 
     //alta cafes
+    private  void altaCafes(){
 
+    }
 
     //alta tés
+    private  void altaTes(){
 
+    }
 
-    //oxidacion?? preguntar hoy en clase para asegurar
+    //oxidacion?? preguntar hoy en clase para
+    // asegurar esto seria para determimnar el tipo de te segun la oxidacion de la hoja
 
 
     //exportar
