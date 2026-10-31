@@ -1,7 +1,7 @@
 package com.martinlt.CafesyTe.base;
 
 public class Tes extends  Bebida {
-private int oxidacion;//preguntar tambien por si acaso la profesora no le gusta en int
+private int oxidacion;
 
     public Tes(){
         super();

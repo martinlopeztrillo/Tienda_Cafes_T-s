@@ -1,23 +1,28 @@
 package com.martinlt.CafesyTe.base;
 
+import com.github.lgooddatepicker.components.DatePicker;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class Vista {
+public class Vista<pu> {
     //creados por mi
     private JFrame frame;
     public DefaultListModel<Bebida> dlmBebida;
     // creados por el from
     private JPanel panel1;
-    private JTextField textField1;
     private JRadioButton cafesRB;
+    private JTextField textField1;
     private JRadioButton TésRB;
-    private JTextField textField2;
-    private JTextField textField3;
+    private JTextField nombreTxt;
+    private JTextField tipoTxt;
     private JButton nuevoButton;
     private JButton exportarButton;
     private JButton importarButton;
     private JList list1;
+    public DatePicker FechaPedido;
+
+
 
 
     public Vista() {

@@ -1,16 +1,20 @@
 package com.martinlt.CafesyTe.base;
 
+import java.time.LocalDate;
+
 public abstract class Bebida {
     private String nombre;
     private String tipo;
+    private LocalDate FechaPedido;
 
-    public  Bebida(){
+    public Bebida() {
 
     }
 
-    public Bebida(String nombre, String tipo) {
+    public Bebida(String nombre, String tipo, LocalDate fechaPedido) {
         this.nombre = nombre;
         this.tipo = tipo;
+        FechaPedido = fechaPedido;
     }
 
     public String getNombre() {
@@ -29,8 +33,20 @@ public abstract class Bebida {
         this.tipo = tipo;
     }
 
+    public LocalDate getFechaPedido() {
+        return FechaPedido;
+    }
+
+    public void setFechaPedido(LocalDate fechaPedido) {
+        FechaPedido = fechaPedido;
+    }
+
     @Override
     public String toString() {
-        return nombre + " - " + tipo;
+        return "Bebida{" +
+                "nombre='" + nombre + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", FechaPedido=" + FechaPedido +
+                '}';
     }
 }
