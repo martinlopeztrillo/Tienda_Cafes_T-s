@@ -28,129 +28,130 @@ public class Modelo {
     }
 
     //alta cafes
-    private  void altaCafes(String nombre, String tipo, String intensidad, LocalDate FechaPedido){
-        Cafes nuevoCafe=new Cafes((nombre,tipo,intensidad,FechaPedido);
+    public  void altaCafes(String nombre, String tipo, String intensidad, LocalDate FechaPedido){
+        Cafes nuevoCafe=new Cafes(nombre,tipo,FechaPedido,intensidad);
         listaBebidas.add(nuevoCafe);
     }
 
     //alta tés
-    private  void altaTes(String nombre,String tipo,int oxidacion,LocalDate FechaPedido){
-        Tes nuevoTes=new Cafes((nombre,tipo,oxidacion,FechaPedido);
+    public  void altaTes(String nombre,String tipo,int oxidacion,LocalDate FechaPedido){
+        Tes nuevoTes=new Tes(nombre,tipo,FechaPedido,oxidacion);
         listaBebidas.add(nuevoTes);
     }
 
     //existe bebida
-    public  boolean existeBebida(String nombre) throws ParserConfigurationException, TransformerConfigurationException {
+    public boolean existeBebida(String nombre){
         for(Bebida bebidas:listaBebidas){
             if(bebidas.getNombre().equals(nombre)){
-                return  true;
+                return true;
             }
-            return false;
         }
-
-
+        return  false;
+    }
     //exportar
-       public void exportar(File fichero) throws ParserConfigurationException,TransformerException{
-            DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder=factory.newDocumentBuilder();
-            DOMImplementation dom=builder.getDOMImplementation();
-            Document documento=dom.createDocument(null,"xml",null);
+    public void exportar(File fichero) throws ParserConfigurationException, TransformerException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        DOMImplementation dom = builder.getDOMImplementation();
+        Document documento = dom.createDocument(null,"xml",null);
 
-            //raiz
-            Element raiz=documento.createElement("Bebida");
-            documento.getDocumentElement().appendChild(raiz);
+        //añado el nodo raiz Bebida
+        Element raiz = documento.createElement("Bebida");
+        documento.getDocumentElement().appendChild(raiz);
 
-            //
-            Element nodoBebida=null;
-            Element nodoDatos=null;
-            Text texto=null;
+        //otros elementos
+        Element nodoBebida=null;
+        Element nodoDatos=null;
+        Text texto=null;
 
+        for (Bebida unBebida: listaBebidas) {
+            //añado dentro de la etiqueta raiz vehiculos (Cafes o Tes)
+            if (unBebida instanceof Cafes) {
+                nodoBebida=documento.createElement("Cafes");
+            } else {
+                nodoBebida=documento.createElement("Tes");
+            }
+            raiz.appendChild(nodoBebida);
 
-            for(Bebida unBebida:listaBebidas){
-                //añado dentro de la etiqueta raiz Bebidas cafes o tes)
-                if(unBebida instanceof Cafes){
-                    nodoBebida=documento.createElement("Cafe");
-                }else{
-                    nodoBebida=documento.createElement("Te");
-                }
-                raiz.appendChild(nodoBebida);
+            //dentro de cada Cafes, Tes tengo que poner las etiquetas Nombre, Tipo,...
+            nodoDatos=documento.createElement("Nombre");
+            nodoBebida.appendChild(nodoDatos);
 
-                //dentro de cada cafes tes tengo que poner las etiquetas matricula etc
-                nodoDatos=documento.createElement("Nombre");
+            texto=documento.createTextNode(unBebida.getNombre());
+            nodoBebida.appendChild(texto);
+
+            nodoDatos=documento.createElement("Tipo");
+            nodoBebida.appendChild(nodoDatos);
+
+            texto=documento.createTextNode(unBebida.getTipo());
+            nodoDatos.appendChild(texto);
+
+            nodoDatos=documento.createElement("fechaPedido");
+            nodoBebida.appendChild(nodoDatos);
+
+            texto=documento.createTextNode(String.valueOf(unBebida.getFechaPedido().toString()));
+            nodoDatos.appendChild(texto);
+
+            //nos falta el dato diferente (Intensidd, Oxidacion)
+            if (unBebida instanceof Cafes) {
+                nodoDatos=documento.createElement("Intensidad");
                 nodoBebida.appendChild(nodoDatos);
 
-                texto=documento.createTextNode(unBebida.getNombre());
+                texto=documento.createTextNode(String.valueOf(((Cafes) unBebida).getIntensidad()));
                 nodoDatos.appendChild(texto);
-
-                nodoDatos=documento.createElement("Tipo");
+            } else {
+                nodoDatos=documento.createElement("Oxidacion");
                 nodoBebida.appendChild(nodoDatos);
 
-                nodoDatos=documento.createElement("fechaPedido");
-                nodoBebida.appendChild(nodoDatos);
-
-              ;
-
-                //nos falata el dato diferenet (numPlazas,kms)
-
-                if(unBebida instanceof  Cafes){
-                    nodoDatos=documento.createElement("Intensidad");
-                    nodoBebida.appendChild(nodoDatos);
-
-                    texto=documento.createTextNode(String.valueOf(((Cafes) unBebida).getIntensidad()));
-                    nodoDatos.appendChild(texto);
-                }else{
-                    nodoDatos=documento.createElement("Oxidacion");
-                    nodoBebida.appendChild(nodoDatos);
-
-                    texto=documento.createTextNode(String.valueOf(((Tes) unBebida).getOxidacion()));
-                    nodoDatos.appendChild(texto);
-                }
-
+                texto=documento.createTextNode(String.valueOf(((Tes) unBebida).getOxidacion()));
+                nodoDatos.appendChild(texto);
             }
-            // guardo en fichero
-            Source source=new DOMSource(documento);
-            Result resultado=new StreamResult(fichero);
 
-            Transformer transformer= TransformerFactory.newInstance().newTransformer();
-            try {
-                transformer.transform(source,resultado);
-            } catch (TransformerException e) {
-                e.printStackTrace();
-            }
         }
-        }
+        //guardo en fichero
+        Source source = new DOMSource(documento);
+        Result resultado = new StreamResult(fichero);
+
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(source,resultado);
+    }
+
     //importar
-    public  void importarXML(File fichero) throws ParserConfigurationException, IOException, SAXException {
-        listaBebidas=new ArrayList<Bebida>();
-        Cafes nuevoCafe=null;
-        Tes nuevaTes=null;
+    public void importarXML(File fichero) throws ParserConfigurationException, IOException, SAXException {
+        listaBebidas = new ArrayList<Bebida>();
+        Cafes nuevoCafes = null;
+        Tes nuevaTes = null;
 
-        DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder= factory.newDocumentBuilder();
-        Document documento=builder.parse(fichero);
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document documento = builder.parse(fichero);
 
-        NodeList listaElementos=documento.getElementsByTagName("*");
+        NodeList listaElementos = documento.getElementsByTagName("*");
 
-        for(int i=0;i<listaElementos.getLength();i++){
-            Element nodoBebida=(Element) listaElementos.item(i);
-            if(nodoBebida.getTagName().equals("Cafes")){
-                nuevoCafe=new Cafes();
-                nuevoCafe.setNombre(nodoBebida.getChildNodes().item(0).getTextContent());
-                nuevoCafe.setTipo(nodoBebida.getChildNodes().item(1).getTextContent());
-                nuevoCafe.setIntensidad(nodoBebida.getChildNodes().item(2).getTextContent());
-                nuevoCafe.setFechaPedido(LocalDate.parse(nodoBebida.getChildNodes().item(3).getTextContent()));
-                listaBebidas.add(nuevoCafe);
-            }else{
-                nuevaTes=new Tes();
-                nuevaTes.setNombre(nodoBebida.getChildNodes().item(0).getTextContent());
-                nuevaTes.setTipo(nodoBebida.getChildNodes().item(1).getTextContent());
-                nuevaTes.setOxidacion(Integer.parseInt(nodoBebida.getChildNodes().item(2).getTextContent()));
-                nuevaTes.setFechaPedido(LocalDate.parse(nodoBebida.getChildNodes().item(3).getTextContent()));
-                listaBebidas.add(nuevaTes);
+        for (int i = 0; i < listaElementos.getLength(); i++) {
+            Element nodoBebidas = (Element) listaElementos.item(i);
+            if (nodoBebidas.getTagName().equals("Cafe")) {
+                nuevoCafes = new Cafes();
+                nuevoCafes.setNombre(nodoBebidas.getChildNodes().item(0).getTextContent());
+                nuevoCafes.setTipo(nodoBebidas.getChildNodes().item(1).getTextContent());
+                nuevoCafes.setFechaPedido(LocalDate.parse(nodoBebidas.getChildNodes().item(3).getTextContent()));
+                nuevoCafes.setIntensidad(nodoBebidas.getChildNodes().item(4).getTextContent());
+                listaBebidas.add(nuevoCafes);
+            } else {
+                if (nodoBebidas.getTagName().equals("Tes")) {
+                    nuevaTes = new Tes();
+                    nuevaTes.setNombre(nodoBebidas.getChildNodes().item(0).getTextContent());
+                    nuevaTes.setTipo(nodoBebidas.getChildNodes().item(1).getTextContent());
+                    nuevaTes.setFechaPedido(LocalDate.parse(nodoBebidas.getChildNodes().item(3).getTextContent()));
+                    nuevaTes.setOxidacion(Integer.parseInt(nodoBebidas.getChildNodes().item(4).getTextContent()));
+                    listaBebidas.add(nuevaTes);
+                }
             }
+
         }
+
     }
-    }
+}
 
 
 

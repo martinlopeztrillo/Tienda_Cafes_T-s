@@ -7,21 +7,21 @@ import java.awt.*;
 
 public class Vista<pu> {
     //creados por mi
-    private JFrame frame;
+    public JFrame frame;
     public DefaultListModel<Bebida> dlmBebida;
     // creados por el from
     private JPanel panel1;
-    private JRadioButton cafesRB;
-    private JTextField nombreTxt;
-    private JRadioButton TesRB;
-    private JTextField intensidadTxt;
-    private JTextField tipoTxt;
-    private JButton nuevoButton;
-    private JButton exportarButton;
-    private JButton importarButton;
-    private JList list1;
+    public JRadioButton cafesRB;
+    public JTextField nombreTxt;
+    public JRadioButton TesRB;
+    public JTextField intensidadTxt;
+    public JTextField tipoTxt;
+    public JButton nuevoButton;
+    public JButton exportarButton;
+    public JButton importarButton;
+    public JList list1;
     public DatePicker FechaPedidoDP;
-    private JTextField IntensiOxidablTxt;
+    public JTextField IntensiOxidablTxt;
 
 
     public Vista() {
@@ -39,4 +39,7 @@ public class Vista<pu> {
         list1.setModel(dlmBebida);
     }
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }

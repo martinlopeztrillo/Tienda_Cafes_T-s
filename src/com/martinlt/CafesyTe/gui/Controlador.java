@@ -2,6 +2,7 @@ package com.martinlt.CafesyTe.gui;
 
 import com.martinlt.CafesyTe.base.Bebida;
 import com.martinlt.CafesyTe.base.Cafes;
+import com.martinlt.CafesyTe.base.Tes;
 import com.martinlt.CafesyTe.base.Vista;
 import com.martinlt.CafesyTe.util.Util;
 import org.xml.sax.SAXException;
@@ -41,8 +42,6 @@ private File ultimaRutaExportada;
     private boolean hayCamposVacios(){
         if(vista.nombreTxt.getText().isEmpty() ||
                 vista.tipoTxt.getText().isEmpty() ||
-                vista.intensidadTtx.getText().isEmpty() ||
-                vista.oxidacionTxt.getText().isEmpty()||
                 vista.FechaPedidoDP.getText().isEmpty()
         ){
             return  true;
@@ -53,8 +52,6 @@ private File ultimaRutaExportada;
     private void limpiarCampos(){
         vista.nombreTxt.setText(null);
         vista.tipoTxt.setText(null);
-        vista.Oxidacion.setText(null);
-        vista.Intensidad.setText(null);
         vista.FechaPedidoDP.setText(null);
 
     }
@@ -97,6 +94,10 @@ private File ultimaRutaExportada;
     }
 
 
+    @Override
+    public void windowOpened(WindowEvent windowEvent) {
+
+    }
 
     @Override
     public void windowClosing(WindowEvent e) {
@@ -113,37 +114,40 @@ private File ultimaRutaExportada;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String  actionComand=e.getActionCommand();
-        switch (actionComand) {
+        String  actionCommand=e.getActionCommand();
+        switch (actionCommand) {
             case "Nuevo":
                 if (hayCamposVacios()) {
-                    Util.mensajeError("Porfavor rellene los siguientes campos \n" +
-                            "Nombre \n Tipo o Fecha de pedido+" +
-                            vista.Tipo.getText());
-
-                }
-                if (modelo.existeBebida(vista.nombreTxt.getText())) {
-                    Util.mensajeError("Ya existe este Nombre" + vista.nombreTxt.getText());
+                    Util.mensajeError("Porfavor rellene los siguientes campos: \n" +
+                            "Nombre \n Tipo \n Fecha Pedido"
+                            +vista.IntensiOxidablTxt.getText());
                     break;
                 }
-                if(vista.cafesRB.isSelected()){
-                    modelo.altaCafes(vista.nombreTxtt.getText(),vista.tipoTXt.getText(),
-                           vista.FechaPedidoDP.getDate(),
-                            Integer.parseInt((vista.IntensidadTxt.getText())));
-                }else{
-                    modelo.altaTes(vista.nombreTxt.getText(),vista.tipoTxt.getText(),
-                            vista.FechaPedidoDP.getDate(),
-                            Double.parseDouble((vista.OxidacionTxt.getText())));
+                if (modelo.existeBebida(vista.tipoTxt.getText())) {
+                    Util.mensajeError("Ya existe esta bebida con este nombre \n" +
+                            vista.tipoTxt.getText());
+                    break;
+                }
+                if (vista.cafesRB.isSelected()) {
+                    modelo.altaCafes(vista.nombreTxt.getText(),
+                            vista.tipoTxt.getText(),
+                            vista.IntensiOxidablTxt.getText(),
+                            vista.FechaPedidoDP.getDate());
 
+                } else {
+                    modelo.altaTes(vista.nombreTxt.getText(),
+                                                vista.tipoTxt.getText(),
+                            Integer.parseInt(vista.IntensiOxidablTxt.getText()),
+                            vista.FechaPedidoDP.getDate());
                 }
                 limpiarCampos();
                 refrescar();
                 break;
             case "Importar":
-                JFileChooser selectorFichero=Util.crearSelectionFichero(ultimaRutaExportada,
+                JFileChooser selectorFichero = Util.crearSelectionFichero(ultimaRutaExportada,
                         "Archivos XML","xml");
-                int opcion=selectorFichero.showOpenDialog(null);
-                if(opcion==JFileChooser.APPROVE_OPTION){
+                int opcion = selectorFichero.showOpenDialog(null);
+                if (opcion==JFileChooser.APPROVE_OPTION) {
                     try {
                         modelo.importarXML(selectorFichero.getSelectedFile());
                     } catch (ParserConfigurationException ex) {
@@ -153,13 +157,14 @@ private File ultimaRutaExportada;
                     } catch (SAXException ex) {
                         ex.printStackTrace();
                     }
+                    refrescar();
                 }
                 break;
             case "Exportar":
-                JFileChooser selectorFichero2=Util.crearSelectionFichero(ultimaRutaExportada,
+                JFileChooser selectorFichero2 = Util.crearSelectionFichero(ultimaRutaExportada,
                         "Archivos XML","xml");
-                int opcion2=selectorFichero.showSaveDialog(null);
-                if(opcion2==JFileChooser.APPROVE_OPTION){
+                int opcion2 = selectorFichero2.showSaveDialog(null);
+                if (opcion2==JFileChooser.APPROVE_OPTION) {
                     try {
                         modelo.exportar(selectorFichero2.getSelectedFile());
                         actualizarDatosConfiguracion(selectorFichero2.getSelectedFile());
@@ -168,24 +173,25 @@ private File ultimaRutaExportada;
                     } catch (TransformerException ex) {
                         ex.printStackTrace();
                     }
-                    break;
-                    case "Te":
-                        vista.IntensiOxidablTxt.setText("Oxidacion");
-                        break;
-                    case "Cafes":
-                        vista.IntensiOxidablTxt.setText("Intensidad");
-                        break;
-
                 }
+                break;
+            case "Tes":
+                vista.IntensiOxidablTxt.setText("Oxidacion");
+                break;
+            case "Cafes":
+                vista.IntensiOxidablTxt.setText("Intensidad");
+                break;
         }
+    }
+
         @Override
         public void valueChanged(ListSelectionEvent e) {
             if(e.getValueIsAdjusting()){
                 Bebida BebidaSeleccionada= (Bebida) vista.list1.getSelectedValue();
-                vista.nombreaTxt.setText(BebidaSeleccionada.getNombre());
+                vista.nombreTxt.setText(BebidaSeleccionada.getNombre());
                 vista.tipoTxt.setText(BebidaSeleccionada.getTipo());
 
-                vista.FechaPedidoDP.setDate(BebidaSeleccionada.getNombre());
+                vista.FechaPedidoDP.setDate(BebidaSeleccionada.getFechaPedido());
                 if(BebidaSeleccionada instanceof Cafes){
                     vista.IntensiOxidablTxt.setText(String.valueOf(((Cafes) BebidaSeleccionada).getIntensidad()));
                     vista.cafesRB.doClick();
@@ -196,7 +202,7 @@ private File ultimaRutaExportada;
             }
         }
 
-    }
+
 
     // No se usan
 
@@ -225,9 +231,4 @@ private File ultimaRutaExportada;
 
     }
 
-
-    @Override
-    public void valueChanged(ListSelectionEvent listSelectionEvent) {
-
-    }
 }

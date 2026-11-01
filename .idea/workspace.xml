@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c1b11ff0-4f20-4af7-b774-b677c6534f0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/base/Cafes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/base/Cafes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/base/Tes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/base/Tes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/base/Vista.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/base/Vista.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/base/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/base/Vista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/gui/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/martinlt/CafesyTe/gui/Controlador.java" afterDir="false" />
@@ -92,7 +94,7 @@
       <workItem from="1793201533823" duration="214000" />
       <workItem from="1793201977554" duration="2376000" />
       <workItem from="1793432956737" duration="4277000" />
-      <workItem from="1793520533258" duration="1941000" />
+      <workItem from="1793520533258" duration="4899000" />
     </task>
     <servers />
   </component>

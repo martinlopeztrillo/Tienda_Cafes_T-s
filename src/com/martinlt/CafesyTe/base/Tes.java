@@ -1,5 +1,7 @@
 package com.martinlt.CafesyTe.base;
 
+import java.time.LocalDate;
+
 public class Tes extends  Bebida {
 private int oxidacion;
 
@@ -11,8 +13,8 @@ private int oxidacion;
         this.oxidacion=oxidacion;
     }
 
-    public Tes(String nombre, String tipo, int oxidacion) {
-        super(nombre, tipo);
+    public Tes(String nombre, String tipo, LocalDate FechaPedido, int oxidacion) {
+        super(nombre, tipo,FechaPedido);
         this.oxidacion = oxidacion;
     }
 
