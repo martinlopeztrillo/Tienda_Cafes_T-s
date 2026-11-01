@@ -23,7 +23,7 @@ public class Modelo {
     public Modelo(){
         listaBebidas=new ArrayList<Bebida>();
     }
-    public  ArrayList<Bebida> obtenerVehiculos(){
+    public  ArrayList<Bebida> obtenerBebidas(){
         return listaBebidas;
     }
 
@@ -144,7 +144,7 @@ public class Modelo {
                 nuevaTes=new Tes();
                 nuevaTes.setNombre(nodoBebida.getChildNodes().item(0).getTextContent());
                 nuevaTes.setTipo(nodoBebida.getChildNodes().item(1).getTextContent());
-                nuevaTes.setOxidacion(nodoBebida.getChildNodes().item(2).getTextContent());
+                nuevaTes.setOxidacion(Integer.parseInt(nodoBebida.getChildNodes().item(2).getTextContent()));
                 nuevaTes.setFechaPedido(LocalDate.parse(nodoBebida.getChildNodes().item(3).getTextContent()));
                 listaBebidas.add(nuevaTes);
             }

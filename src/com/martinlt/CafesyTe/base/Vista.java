@@ -12,17 +12,16 @@ public class Vista<pu> {
     // creados por el from
     private JPanel panel1;
     private JRadioButton cafesRB;
-    private JTextField textField1;
-    private JRadioButton TésRB;
     private JTextField nombreTxt;
+    private JRadioButton TesRB;
+    private JTextField intensidadTxt;
     private JTextField tipoTxt;
     private JButton nuevoButton;
     private JButton exportarButton;
     private JButton importarButton;
     private JList list1;
-    public DatePicker FechaPedido;
-
-
+    public DatePicker FechaPedidoDP;
+    private JTextField IntensiOxidablTxt;
 
 
     public Vista() {

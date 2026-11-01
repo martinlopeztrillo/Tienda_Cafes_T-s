@@ -16,6 +16,8 @@
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
     <colspec value="fill:d:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
@@ -45,7 +47,7 @@
           <text value="Nombre"/>
         </properties>
       </component>
-      <component id="1e159" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="1e159" class="javax.swing.JTextField" binding="nombreTxt">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -72,7 +74,7 @@
           <text value="Cafes"/>
         </properties>
       </component>
-      <component id="f5c6b" class="javax.swing.JRadioButton" binding="TésRB">
+      <component id="f5c6b" class="javax.swing.JRadioButton" binding="TesRB">
         <constraints>
           <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
@@ -90,7 +92,7 @@
           <text value="Tipo"/>
         </properties>
       </component>
-      <component id="392a0" class="javax.swing.JTextField" binding="nombreTxt">
+      <component id="392a0" class="javax.swing.JTextField" binding="intensidadTxt">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -117,7 +119,7 @@
           <text value="Fecha de pedido"/>
         </properties>
       </component>
-      <component id="db8e3" class="com.github.lgooddatepicker.components.DatePicker" binding="FechaPedido">
+      <component id="db8e3" class="com.github.lgooddatepicker.components.DatePicker" binding="FechaPedidoDP">
         <constraints>
           <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
@@ -126,7 +128,7 @@
       </component>
       <component id="108df" class="javax.swing.JButton" binding="nuevoButton" default-binding="true">
         <constraints>
-          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -135,7 +137,7 @@
       </component>
       <component id="da12b" class="javax.swing.JButton" binding="exportarButton" default-binding="true">
         <constraints>
-          <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -144,7 +146,7 @@
       </component>
       <component id="b270d" class="javax.swing.JButton" binding="importarButton" default-binding="true">
         <constraints>
-          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -153,7 +155,7 @@
       </component>
       <scrollpane id="9760c">
         <constraints>
-          <grid row="10" column="2" row-span="5" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="2" row-span="5" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -165,6 +167,24 @@
           </component>
         </children>
       </scrollpane>
+      <component id="c7279" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Intensidad"/>
+        </properties>
+      </component>
+      <component id="88cb4" class="javax.swing.JTextField" binding="IntensiOxidablTxt">
+        <constraints>
+          <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+      </component>
     </children>
   </grid>
 </form>
